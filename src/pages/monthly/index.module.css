@@ -1,0 +1,19 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.content > button {
+  width: 400px;
+}
+
+.table {
+  background-color: #eff2fb;
+}
+
+.title {
+  padding: 2rem 1rem;
+  font-size: large;
+  font-weight: 800;
+}

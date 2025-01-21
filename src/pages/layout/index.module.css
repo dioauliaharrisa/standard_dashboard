@@ -1,0 +1,12 @@
+.dashboard {
+  height: 100vh;
+  display: flex;
+}
+
+.sidebar {
+  background-color: white;
+  width: 15%;
+  height: 100%;
+  padding: 1rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
