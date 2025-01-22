@@ -1,4 +1,4 @@
-import { NavLink, Paper } from "@mantine/core";
+import { Card, NavLink, Paper } from "@mantine/core";
 import { IconGauge, IconFingerprint } from "@tabler/icons-react";
 import { ReactNode, useState } from "react";
 import styles from "./index.module.css";
@@ -40,7 +40,10 @@ export const Layout: React.FC = () => {
       <Paper shadow="xs" className={styles.sidebar}>
         {items}
       </Paper>
-      <Outlet />
+      <div className={styles.page}>
+        <Card className={styles.header}></Card>
+        <Outlet />
+      </div>
     </div>
   );
 };

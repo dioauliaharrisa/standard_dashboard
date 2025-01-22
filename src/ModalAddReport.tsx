@@ -65,7 +65,12 @@ export const ModalAddReport = (props: {
           key={form.key("bagian")}
           label="Bagian"
           placeholder="Pilih bagian"
-          data={["Teknis", "B", "C", "D"]}
+          data={[
+            "Teknis",
+            "Dukman",
+            "Tiket Pelayanan",
+            "Monitoring Kebersihan",
+          ]}
           {...form.getInputProps("bagian")}
         />
         <Select

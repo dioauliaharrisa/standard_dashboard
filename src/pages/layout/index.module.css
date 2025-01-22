@@ -10,3 +10,12 @@
   padding: 1rem;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+.page {
+  width: 100%;
+}
+
+.header {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  height: 8vh;
+}
