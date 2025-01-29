@@ -1,7 +1,10 @@
 import { Button, Group, Pagination, Paper, Table, Text } from "@mantine/core";
 import styles from "./index.module.css";
-import { useState } from "react";
-import { ModalAddReport } from "../../ModalAddReport";
+import { useEffect, useState } from "react";
+import { ModalAddReport } from "../components/modal-add-reports";
+import { Report } from "./types";
+
+const API_BASE_URL = "http://localhost:3000";
 
 export const DailyReport = () => {
   const [shouldShowForm, setShouldShowForm] = useState(false);
@@ -9,22 +12,50 @@ export const DailyReport = () => {
   const toggleForm = () => {
     setShouldShowForm(!shouldShowForm);
   };
-  const elements = [
-    { position: 6, mass: 12.011, symbol: "C", name: "Tanggal" },
-    { position: 7, mass: 14.007, symbol: "N", name: "Bagian" },
-    { position: 39, mass: 88.906, symbol: "Y", name: "Jenis Laporan" },
-    { position: 56, mass: 137.33, symbol: "Ba", name: "Personil" },
-    { position: 58, mass: 140.12, symbol: "Ce", name: "Laporan Output" },
-    { position: 58, mass: 140.12, symbol: "Ce", name: "Dokumentasi" },
-  ];
-  const rows = elements.map((element) => (
-    <Table.Tr key={element.name}>
-      <Table.Td>{element.position}</Table.Td>
-      <Table.Td>{element.name}</Table.Td>
-      <Table.Td>{element.symbol}</Table.Td>
-      <Table.Td>{element.mass}</Table.Td>
+
+  const [reports, setReports] = useState<Report[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  console.log("🦆 ~ DailyReport ~ reports:", reports);
+  const fetchReports = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(`${API_BASE_URL}/report/get-all`);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+      const data = await response.json();
+      setReports(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchReports();
+  }, []);
+
+  const rows = reports.map((report) => (
+    <Table.Tr key={report.id}>
+      <Table.Td>
+        {new Date(report.date).toLocaleString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      </Table.Td>
+      <Table.Td>{report.section}</Table.Td>
+      <Table.Td>{report.reportType ?? "-"}</Table.Td>
+      <Table.Td>{report.personnels}</Table.Td>
+      <Table.Td>{report.outputReport}</Table.Td>
+      <Table.Td>{report.documentation ? "Yes" : "No"}</Table.Td>
     </Table.Tr>
   ));
+
   const [value, setValue] = useState<Date | null>(null);
   return (
     <>

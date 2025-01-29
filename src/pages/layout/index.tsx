@@ -1,6 +1,6 @@
 import { Card, NavLink, Paper } from "@mantine/core";
 import { IconGauge, IconFingerprint } from "@tabler/icons-react";
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import styles from "./index.module.css";
 import { Outlet } from "react-router";
 
