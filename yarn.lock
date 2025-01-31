@@ -531,39 +531,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/dates@npm:^7.16.1":
-  version: 7.16.1
-  resolution: "@mantine/dates@npm:7.16.1"
-  dependencies:
-    clsx: "npm:^2.1.1"
-  peerDependencies:
-    "@mantine/core": 7.16.1
-    "@mantine/hooks": 7.16.1
-    dayjs: ">=1.0.0"
-    react: ^18.x || ^19.x
-    react-dom: ^18.x || ^19.x
-  checksum: 10c0/cd6133e2f251b7dc60e872e96af32919e935f2cacd07c7bd7a4b8f2d34e82f780a0a93e022e0ffaa85f61aded535d69fd166f84d056f9ce09648acf5446331e0
-  languageName: node
-  linkType: hard
-
 "@mantine/form@npm:^7.16.1":
-  version: 7.16.1
-  resolution: "@mantine/form@npm:7.16.1"
+  version: 7.16.2
+  resolution: "@mantine/form@npm:7.16.2"
   dependencies:
     fast-deep-equal: "npm:^3.1.3"
     klona: "npm:^2.0.6"
   peerDependencies:
     react: ^18.x || ^19.x
-  checksum: 10c0/c2897fb108d6ad9e47acfb589f748b834c21656c31cea6702e67486ce2719d27b2fdf390475f95f90b954df91d35baa13bb1af4a6862546ee0d723ebd66214b1
-  languageName: node
-  linkType: hard
-
-"@mantine/hooks@npm:7.16.0":
-  version: 7.16.0
-  resolution: "@mantine/hooks@npm:7.16.0"
-  peerDependencies:
-    react: ^18.x || ^19.x
-  checksum: 10c0/1e165bbdc2030b4ea6aaec0b1168f01e06f45d427a67e73ab7ecb4e47fc7031cf46cee8b8a31ca017b5363bea509836faa8c248f542dd581f44cf62e7ecc50ae
+  checksum: 10c0/679d825f1917a806705ee828393ba19823ed30acc81e9efe9c86f9082168597b8372fadab95e8e8441888b91c880b4ac4d974e45a1cf74339005ba5d275097b9
   languageName: node
   linkType: hard
 
@@ -757,20 +733,20 @@ __metadata:
   linkType: hard
 
 "@tabler/icons-react@npm:^3.28.1":
-  version: 3.28.1
-  resolution: "@tabler/icons-react@npm:3.28.1"
+  version: 3.29.0
+  resolution: "@tabler/icons-react@npm:3.29.0"
   dependencies:
-    "@tabler/icons": "npm:3.28.1"
+    "@tabler/icons": "npm:3.29.0"
   peerDependencies:
     react: ">= 16"
-  checksum: 10c0/fe8b7baaae5a2c896c519c509d3c05e83cf4ea0c5b683add200cd2c0587a66a590a3ca26f54e91a8ee2b15c519c0854651c11490c2eab8ef111cee9b8e76b3e3
+  checksum: 10c0/ace4c8cf41cf92a1193ded132427e1d9e4bd964cd4c917dfdbfc3b5dc225ece400f3de4acea3331a558ef26eab2430cc9b13f438fc87bad4ce201c9ec2d832c1
   languageName: node
   linkType: hard
 
-"@tabler/icons@npm:3.28.1":
-  version: 3.28.1
-  resolution: "@tabler/icons@npm:3.28.1"
-  checksum: 10c0/330f738b74d203e910382725f4ff6b9c177f8738a54c71fc6e56c3204cf21749b0512148650ae85c211692c49aa5e03f09f2ea8458688309d917bb65f698dbd0
+"@tabler/icons@npm:3.29.0":
+  version: 3.29.0
+  resolution: "@tabler/icons@npm:3.29.0"
+  checksum: 10c0/2a7439428cbe6c197ddf4416e55897926bf525e69d317ae69e6a84ad6e9e37f29c0125cf495508b5463e3b3aaa10c1c7667750a0631b0fa3941cb2ce7a50a488
   languageName: node
   linkType: hard
 
@@ -862,10 +838,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"abbrev@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "abbrev@npm:2.0.0"
-  checksum: 10c0/f742a5a107473946f426c691c08daba61a1d15942616f300b5d32fd735be88fef5cba24201757b6c407fd564555fb48c751cfa33519b2605c8a7aadd22baf372
+"abbrev@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "abbrev@npm:3.0.0"
+  checksum: 10c0/049704186396f571650eb7b22ed3627b77a5aedf98bb83caf2eac81ca2a3e25e795394b0464cfb2d6076df3db6a5312139eac5b6a126ca296ac53c5008069c28
   languageName: node
   linkType: hard
 
@@ -1703,13 +1679,13 @@ __metadata:
   linkType: hard
 
 "nopt@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "nopt@npm:8.0.0"
+  version: 8.1.0
+  resolution: "nopt@npm:8.1.0"
   dependencies:
-    abbrev: "npm:^2.0.0"
+    abbrev: "npm:^3.0.0"
   bin:
     nopt: bin/nopt.js
-  checksum: 10c0/19cb986f79abaca2d0f0b560021da7b32ee6fcc3de48f3eaeb0c324d36755c17754f886a754c091f01f740c17caf7d6aea8237b7fbaf39f476ae5e30a249f18f
+  checksum: 10c0/62e9ea70c7a3eb91d162d2c706b6606c041e4e7b547cbbb48f8b3695af457dd6479904d7ace600856bf923dd8d1ed0696f06195c8c20f02ac87c1da0e1d315ef
   languageName: node
   linkType: hard
 
@@ -1924,8 +1900,8 @@ __metadata:
   linkType: hard
 
 "react-router@npm:^7.1.3":
-  version: 7.1.3
-  resolution: "react-router@npm:7.1.3"
+  version: 7.1.4
+  resolution: "react-router@npm:7.1.4"
   dependencies:
     "@types/cookie": "npm:^0.6.0"
     cookie: "npm:^1.0.1"
@@ -1937,7 +1913,7 @@ __metadata:
   peerDependenciesMeta:
     react-dom:
       optional: true
-  checksum: 10c0/f42f7b245533d1adaa00779a0287993a836d5b56039d97a6643a8b3a721ffb92ff47c97cfb36409fec8794ac3c8a884339f588cf21fcd7f6dccdfc834520c76f
+  checksum: 10c0/3b57c46d7f6e7f04e6cf6e4e3dfba8cf5346baa1b56afc7234ce29c84776e9fd85300df227dc757e82574a05346d93467963f2ca15d92492bb07435d284bf934
   languageName: node
   linkType: hard
 
@@ -2114,11 +2090,11 @@ __metadata:
   linkType: hard
 
 "semver@npm:^7.3.5":
-  version: 7.6.3
-  resolution: "semver@npm:7.6.3"
+  version: 7.7.0
+  resolution: "semver@npm:7.7.0"
   bin:
     semver: bin/semver.js
-  checksum: 10c0/88f33e148b210c153873cb08cfe1e281d518aaa9a666d4d148add6560db5cd3c582f3a08ccb91f38d5f379ead256da9931234ed122057f40bb5766e65e58adaf
+  checksum: 10c0/bcd1c03209b4be7d8ca86c976a0410beba7d4ec1d49d846a4be154b958db1ff5eaee50760c1d4f4070b19dee3236b8672d3e09642c53ea23740398bba2538a2d
   languageName: node
   linkType: hard
 
@@ -2436,9 +2412,7 @@ __metadata:
   resolution: "vite-min-template@workspace:."
   dependencies:
     "@mantine/core": "npm:7.16.0"
-    "@mantine/dates": "npm:^7.16.1"
     "@mantine/form": "npm:^7.16.1"
-    "@mantine/hooks": "npm:7.16.0"
     "@tabler/icons-react": "npm:^3.28.1"
     "@types/react": "npm:^19.0.7"
     "@types/react-dom": "npm:^19.0.3"

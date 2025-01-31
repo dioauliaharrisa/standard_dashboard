@@ -3,7 +3,6 @@ import styles from "./index.module.css";
 import { useEffect, useState } from "react";
 import { ModalAddReport } from "../components/modal-add-reports";
 import { Report } from "./types";
-import { usePagination } from "@mantine/hooks";
 
 const API_BASE_URL = "http://localhost:3000";
 
@@ -23,9 +22,7 @@ export const DailyReport = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(
-        `${API_BASE_URL}/report/get-all/${currentPage}`
-      );
+      const response = await fetch(`${API_BASE_URL}/report/get-all/1`);
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
@@ -37,14 +34,6 @@ export const DailyReport = () => {
       setLoading(false);
     }
   };
-
-  const { currentPage, setPage, total, perPage } = usePagination({
-    total: reports.length,
-    initialPage: 1,
-    siblings: 1,
-    boundaries: 1,
-    perPage: 5, // Customize how many reports per page
-  });
 
   useEffect(() => {
     fetchReports();

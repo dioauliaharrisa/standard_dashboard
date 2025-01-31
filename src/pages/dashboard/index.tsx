@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { useState } from "react";
-import { Calendar } from "@mantine/dates";
+// import { Calendar } from "@mantine/dates";
 import { Alert } from "@mantine/core";
 // import { IconInfoCircle } from "@tabler/icons-react";
 
@@ -26,12 +26,12 @@ export const Dashboard = () => {
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. At officiis,
         quae tempore necessitatibus placeat saepe.
       </Alert>
-      <Calendar
+      {/* <Calendar
         getDayProps={(date) => ({
           selected: selected.some((s) => dayjs(date).isSame(s, "date")),
           onClick: () => handleSelect(date),
         })}
-      />
+      /> */}
     </>
   );
 };

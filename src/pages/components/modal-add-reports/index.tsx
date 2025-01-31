@@ -8,7 +8,7 @@ import {
   Select,
   TextInput,
 } from "@mantine/core";
-import { DatePickerInput } from "@mantine/dates";
+// import { DatePickerInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 
 import { FormValues } from "./types";
@@ -107,12 +107,12 @@ export const ModalAddReport = (props: {
       centered
     >
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
-        <DatePickerInput
+        {/* <DatePickerInput
           key={form.key("date")}
           label="Tanggal"
           placeholder="Pick date"
           {...form.getInputProps("date")}
-        />
+        /> */}
         <Select
           key={form.key("section")}
           label="Bagian"
