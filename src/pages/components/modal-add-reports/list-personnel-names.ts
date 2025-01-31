@@ -1,4 +1,4 @@
-export const personnels = [
+export const listNamePersonnels = [
   "Sri Anggoro, S.P., M.M.",
   "Inggar Dwi Wahyuni, SE",
   "Novi Susianti, S.Pi., M.Si",

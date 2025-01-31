@@ -12,7 +12,9 @@ import { DatePickerInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 
 import { FormValues } from "./types";
-import { personnels } from "./list-personnel-names";
+import { listNamePersonnels } from "./list-personnel-names";
+import { listNameUPIs } from "./list-name-upis";
+import { listScopeOfWork } from "./list-scope-of-work";
 
 const API_BASE_URL = "http://localhost:3000";
 
@@ -55,7 +57,7 @@ export const ModalAddReport = (props: {
         formData.append("documentation", values.documentation);
       }
 
-      return console.log(form.values);
+      // return console.log(form.values);
 
       // Make API request
       const response = await fetch(`${API_BASE_URL}/report/create`, {
@@ -128,7 +130,7 @@ export const ModalAddReport = (props: {
             key={form.key("reportDetails.type")}
             label="Jenis Laporan"
             placeholder="Pilih jenih laporan"
-            data={mapSectionReportType[section]}
+            data={mapSectionReportType?.[section]}
             {...form.getInputProps("reportDetails.type")}
           />
         )}
@@ -137,7 +139,7 @@ export const ModalAddReport = (props: {
             key={form.key("reportDetails.upiName")}
             label="Nama upi"
             placeholder="Pilih jenih laporan"
-            data={["A", "B", "C", "D"]}
+            data={listNameUPIs}
             {...form.getInputProps("reportDetails.upiName")}
           />
         )}
@@ -146,7 +148,7 @@ export const ModalAddReport = (props: {
             key={form.key("reportDetails.scopeOfWork")}
             label="Ruang lingkup"
             placeholder="Pilih jenih laporan"
-            data={["A", "B", "C", "D"]}
+            data={listScopeOfWork}
             {...form.getInputProps("reportDetails.scopeOfWork")}
           />
         )}
@@ -161,7 +163,7 @@ export const ModalAddReport = (props: {
         <MultiSelect
           label="Personil"
           placeholder="Search value"
-          data={personnels}
+          data={listNamePersonnels}
           nothingFoundMessage="Nothing found..."
           {...form.getInputProps("personnels")}
         />

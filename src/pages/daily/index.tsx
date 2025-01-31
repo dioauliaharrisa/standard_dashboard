@@ -3,6 +3,7 @@ import styles from "./index.module.css";
 import { useEffect, useState } from "react";
 import { ModalAddReport } from "../components/modal-add-reports";
 import { Report } from "./types";
+import { usePagination } from "@mantine/hooks";
 
 const API_BASE_URL = "http://localhost:3000";
 
@@ -22,7 +23,9 @@ export const DailyReport = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${API_BASE_URL}/report/get-all`);
+      const response = await fetch(
+        `${API_BASE_URL}/report/get-all/${currentPage}`
+      );
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
@@ -34,6 +37,14 @@ export const DailyReport = () => {
       setLoading(false);
     }
   };
+
+  const { currentPage, setPage, total, perPage } = usePagination({
+    total: reports.length,
+    initialPage: 1,
+    siblings: 1,
+    boundaries: 1,
+    perPage: 5, // Customize how many reports per page
+  });
 
   useEffect(() => {
     fetchReports();
@@ -49,7 +60,7 @@ export const DailyReport = () => {
         })}
       </Table.Td>
       <Table.Td>{report.section}</Table.Td>
-      <Table.Td>{report.reportType ?? "-"}</Table.Td>
+      <Table.Td>{report.report.type ?? "-"}</Table.Td>
       <Table.Td>{report.personnels}</Table.Td>
       <Table.Td>{report.outputReport}</Table.Td>
       <Table.Td>{report.documentation ? "Yes" : "No"}</Table.Td>
@@ -84,7 +95,12 @@ export const DailyReport = () => {
           <Table.Tbody>{rows}</Table.Tbody>
         </Table>
         <div className={styles.pagination_bar}>
-          <Pagination className={styles.pagination} total={10} />
+          <Pagination
+            className={styles.pagination}
+            total={reports.length}
+            siblings={1}
+            boundaries={1}
+          />
         </div>
       </Paper>
     </>

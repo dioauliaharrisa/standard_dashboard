@@ -10,7 +10,7 @@ export const Layout: React.FC = () => {
     {
       icon: IconGauge,
       label: "Dashboard",
-      href: "daily",
+      href: "dashboard",
     },
     {
       icon: IconFingerprint,
