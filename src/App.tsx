@@ -7,27 +7,39 @@ import { Layout } from "./pages/layout";
 import { MonthlyReport } from "./pages/monthly";
 import { DailyReport } from "./pages/daily";
 import { Dashboard } from "./pages/dashboard";
+import { Login } from "./pages/login";
+import ProtectedRoute from "./pages/components/protected-route";
+import { AuthProvider } from "./pages/components/auth";
 
 export default function App() {
   const router = createBrowserRouter([
+    {
+      path: "/login",
+      element: <Login />,
+    },
     {
       path: "/",
       element: <Layout />,
       children: [
         {
-          path: "/dashboard",
-          element: <Dashboard />,
-          children: [],
-        },
-        {
-          path: "/daily",
-          element: <DailyReport />,
-          children: [],
-        },
-        {
-          path: "/monthly",
-          element: <MonthlyReport />,
-          children: [],
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "/dashboard",
+              element: <Dashboard />,
+              children: [],
+            },
+            {
+              path: "/daily",
+              element: <DailyReport />,
+              children: [],
+            },
+            {
+              path: "/monthly",
+              element: <MonthlyReport />,
+              children: [],
+            },
+          ],
         },
       ],
     },
@@ -35,7 +47,9 @@ export default function App() {
 
   return (
     <MantineProvider theme={theme}>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </MantineProvider>
   );
 }

@@ -23,6 +23,7 @@ export const ModalAddReport = (props: {
   toggleForm: () => void;
   setValue: React.Dispatch<React.SetStateAction<Date | null>>;
   value: Date | null;
+  fetchReports: () => void;
 }) => {
   const form = useForm({
     initialValues: {
@@ -69,6 +70,8 @@ export const ModalAddReport = (props: {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
+      props.fetchReports();
+
       // const data: CreateReportResponse = await response.json();
 
       // Close the modal
@@ -82,7 +85,7 @@ export const ModalAddReport = (props: {
   };
   const section = form.values.section;
 
-  const mapSectionReportType = {
+  const mapSectionReportType: { [key: string]: string[] } = {
     Teknis: [
       "Inspeksi HACCP",
       "Suveillance HACCP",

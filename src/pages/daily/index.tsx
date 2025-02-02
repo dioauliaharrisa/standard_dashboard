@@ -14,13 +14,9 @@ export const DailyReport = () => {
   };
 
   const [reports, setReports] = useState<Report[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   console.log("🦆 ~ DailyReport ~ reports:", reports);
   const fetchReports = async () => {
-    setLoading(true);
-    setError(null);
     try {
       const response = await fetch(`${API_BASE_URL}/report/get-all/1`);
       if (!response.ok) {
@@ -29,9 +25,7 @@ export const DailyReport = () => {
       const data = await response.json();
       setReports(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
-    } finally {
-      setLoading(false);
+      console.log(err);
     }
   };
 
@@ -64,6 +58,7 @@ export const DailyReport = () => {
         toggleForm={toggleForm}
         setValue={setValue}
         value={value}
+        fetchReports={fetchReports}
       />
       <Paper className={styles.content}>
         <Group justify="space-between">
