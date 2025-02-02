@@ -30,13 +30,13 @@ export const ModalAddReport = (props: {
       date: new Date(),
       section: "",
       personnels: [],
-      outputReport: "",
       documentation: null,
       reportDetails: {
         type: "",
         upiName: "",
         scopeOfWork: "",
         numberHACCP: "",
+        outputReport: "",
       },
     },
 
@@ -52,7 +52,6 @@ export const ModalAddReport = (props: {
       formData.append("date", values.date ? values.date.toISOString() : "");
       formData.append("section", values.section);
       formData.append("personnels", values.personnels.join(",")) ?? "";
-      formData.append("outputReport", values.outputReport);
       formData.append("reportDetails", JSON.stringify(values.reportDetails));
       if (values.documentation) {
         formData.append("documentation", values.documentation);
@@ -175,7 +174,7 @@ export const ModalAddReport = (props: {
           key={form.key("outputReport")}
           label="Laporan Output"
           placeholder="Input placeholder"
-          {...form.getInputProps("outputReport")}
+          {...form.getInputProps("reportDetails.outputReport")}
         />
         <FileInput
           key={form.key("documentation")}

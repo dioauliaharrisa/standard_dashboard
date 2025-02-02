@@ -45,7 +45,7 @@ export const DailyReport = () => {
       <Table.Td>{report.section}</Table.Td>
       <Table.Td>{report.report.type ?? "-"}</Table.Td>
       <Table.Td>{report.personnels}</Table.Td>
-      <Table.Td>{report.outputReport}</Table.Td>
+      <Table.Td>{report.report.outputReport}</Table.Td>
       <Table.Td>{report.documentation ? "Yes" : "No"}</Table.Td>
     </Table.Tr>
   ));

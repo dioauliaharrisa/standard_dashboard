@@ -2,7 +2,6 @@ export interface FormValues {
   date: Date | null;
   section: string;
   personnels: string[];
-  outputReport: string;
   documentation: File | null;
   reportDetails: any;
 }
@@ -21,5 +20,4 @@ export interface CreateReportRequest {
 
 export interface CreateReportResponse {
   id: number;
-  // Add other response fields as needed
 }
