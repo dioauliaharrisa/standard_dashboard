@@ -22,6 +22,7 @@ export const DailyReport = () => {
         throw new Error(`Error: ${response.statusText}`);
       }
       const data = await response.json();
+      console.log("🦆 ~ fetchReports ~ data:", data);
       setReports(data);
     } catch (err) {
       console.log(err);
@@ -32,22 +33,29 @@ export const DailyReport = () => {
     fetchReports();
   }, []);
 
-  const rows = reports.map((report) => (
-    <Table.Tr key={report.id}>
-      <Table.Td>
-        {new Date(report.date).toLocaleString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
-      </Table.Td>
-      <Table.Td>{report.section}</Table.Td>
-      <Table.Td>{report.report.type ?? "-"}</Table.Td>
-      <Table.Td>{report.personnels}</Table.Td>
-      <Table.Td>{report.report.outputReport}</Table.Td>
-      <Table.Td>{report.documentation ? "Yes" : "No"}</Table.Td>
-    </Table.Tr>
-  ));
+  const rows = reports.map((report) => {
+    const bufferData = new Uint8Array(report.documentation);
+    const blob = new Blob([bufferData], { type: "application/zip" });
+    const file = new File([blob], "your-file-name.zip", {
+      type: "application/zip",
+    });
+    return (
+      <Table.Tr key={report.id}>
+        <Table.Td>
+          {new Date(report.date).toLocaleString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </Table.Td>
+        <Table.Td>{report.section}</Table.Td>
+        <Table.Td>{report.report.type ?? "-"}</Table.Td>
+        <Table.Td>{report.personnels}</Table.Td>
+        <Table.Td>{report.report.outputReport}</Table.Td>
+        <Table.Td>{report.documentation ? file : "No"}</Table.Td>
+      </Table.Tr>
+    );
+  });
 
   const [value, setValue] = useState<Date | null>(null);
   return (
