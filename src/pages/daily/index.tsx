@@ -15,7 +15,6 @@ export const DailyReport = () => {
 
   const [reports, setReports] = useState<Report[]>([]);
 
-  console.log("🦆 ~ DailyReport ~ reports:", reports);
   const fetchReports = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/report/get-all/1`);
