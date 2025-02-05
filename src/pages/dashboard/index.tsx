@@ -4,6 +4,8 @@ import { Calendar } from "@mantine/dates";
 import { Alert, Button, Text } from "@mantine/core";
 import { ModalAddSchedule } from "../components/modal-add-schedule";
 import { Schedules } from "./types";
+import { TableTeknis } from "./components/table-teknis";
+import { TableDukman } from "./components/table-dukman";
 
 const API_BASE_URL = "http://localhost:3000";
 
@@ -11,7 +13,6 @@ export const Dashboard = () => {
   const [selected, setSelected] = useState<Date[]>([]);
   const [shouldShowForm, setShouldShowForm] = useState(false);
   const toggleForm = () => {
-    console.log("🦆 ~ toggleForm ~ shouldShowForm:", shouldShowForm);
     setShouldShowForm(!shouldShowForm);
   };
   // const icon = <IconInfoCircle />;
@@ -35,6 +36,7 @@ export const Dashboard = () => {
         throw new Error(`Error: ${response.statusText}`);
       }
       const data = await response.json();
+      console.log("🦆 ~ fetchTodaySchedule ~ data:", data);
       setSchedules(data);
     } catch (err) {
       console.log(err);
@@ -57,7 +59,7 @@ export const Dashboard = () => {
         title="Alert title"
         // icon={icon}
       >
-        {schedules.map((each) => (
+        {schedules?.schedules?.map((each) => (
           <Text>{each.details}</Text>
         ))}
       </Alert>
@@ -68,6 +70,8 @@ export const Dashboard = () => {
           onClick: () => handleSelect(date),
         })}
       />
+      <TableTeknis data={schedules.totalReportsTeknis ?? null} />
+      <TableDukman data={schedules.totalReportsDukman ?? null} />
     </>
   );
 };

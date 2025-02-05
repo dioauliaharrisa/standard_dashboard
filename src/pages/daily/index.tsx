@@ -17,7 +17,7 @@ export const DailyReport = () => {
 
   const fetchReports = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/report/get-all/1`);
+      const response = await fetch(`${API_BASE_URL}/report/get-all`);
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }

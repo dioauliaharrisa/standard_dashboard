@@ -15,12 +15,14 @@ import { FormValues } from "./types";
 import { listNamePersonnels } from "./list-personnel-names";
 import { listNameUPIs } from "./list-name-upis";
 import { listScopeOfWork } from "./list-scope-of-work";
+import { mapSectionReportType } from "./map-section-report-type";
 
 const API_BASE_URL = "http://localhost:3000";
 
 export const ModalAddReport = (props: {
   shouldShowForm: boolean;
   toggleForm: () => void;
+  fetchReports: () => void;
 }) => {
   const form = useForm({
     initialValues: {
@@ -80,23 +82,6 @@ export const ModalAddReport = (props: {
     }
   };
   const section = form.values.section;
-
-  const mapSectionReportType: { [key: string]: string[] } = {
-    Teknis: [
-      "Inspeksi HACCP",
-      "Suveillance HACCP",
-      "Inspeksi SKP",
-      "CPIB",
-      "CPIB Kapal",
-      "CPOIB",
-      "CDOIB",
-      "CPPIB",
-      "CBIB",
-      "SKP",
-      "SPDI",
-    ],
-    Dukman: ["TU Kepegawaian", "Keuangan", "RTP", "Penataan Arsip"],
-  };
 
   return (
     <Modal

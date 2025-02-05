@@ -1,0 +1,20 @@
+import { Table } from "@mantine/core";
+import { TableHeader } from "./table-header";
+import styles from "./index.module.css";
+import { mapSectionReportType } from "../../../components/modal-add-reports/map-section-report-type";
+
+export const TableDukman = ({ data }) => {
+  if (!data) return null;
+
+  const rows = mapSectionReportType["Dukman"].map((each) => {
+    return <Table.Td>{data[each]}</Table.Td>;
+  });
+  return (
+    <Table className={styles.table}>
+      <TableHeader />
+      <Table.Tbody>
+        <Table.Tr>{rows} </Table.Tr>
+      </Table.Tbody>
+    </Table>
+  );
+};
