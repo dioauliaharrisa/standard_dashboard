@@ -1,11 +1,19 @@
 import dayjs from "dayjs";
-import { useState } from "react";
-// import { Calendar } from "@mantine/dates";
-import { Alert } from "@mantine/core";
-// import { IconInfoCircle } from "@tabler/icons-react";
+import { useEffect, useState } from "react";
+import { Calendar } from "@mantine/dates";
+import { Alert, Button } from "@mantine/core";
+import { ModalAddSchedule } from "../components/modal-add-schedule";
+import { Schedules } from "./types";
+
+const API_BASE_URL = "http://localhost:3000";
 
 export const Dashboard = () => {
   const [selected, setSelected] = useState<Date[]>([]);
+  const [shouldShowForm, setShouldShowForm] = useState(false);
+  const toggleForm = () => {
+    console.log("🦆 ~ toggleForm ~ shouldShowForm:", shouldShowForm);
+    setShouldShowForm(!shouldShowForm);
+  };
   // const icon = <IconInfoCircle />;
   const handleSelect = (date: Date) => {
     const isSelected = selected.some((s) => dayjs(date).isSame(s, "date"));
@@ -15,8 +23,34 @@ export const Dashboard = () => {
       );
     }
   };
+
+  const [schedules, setSchedules] = useState<Schedules[]>([]);
+
+  const fetchTodaySchedule = async () => {
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/schedules/get-today-schedule`
+      );
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+      const data = await response.json();
+      setSchedules(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchTodaySchedule();
+  }, []);
+
   return (
     <>
+      <ModalAddSchedule
+        shouldShowForm={shouldShowForm}
+        toggleForm={toggleForm}
+      />
       <Alert
         variant="light"
         color="blue"
@@ -26,12 +60,13 @@ export const Dashboard = () => {
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. At officiis,
         quae tempore necessitatibus placeat saepe.
       </Alert>
-      {/* <Calendar
+      <Button onClick={() => toggleForm()}>Buat skedul</Button>
+      <Calendar
         getDayProps={(date) => ({
           selected: selected.some((s) => dayjs(date).isSame(s, "date")),
           onClick: () => handleSelect(date),
         })}
-      /> */}
+      />
     </>
   );
 };

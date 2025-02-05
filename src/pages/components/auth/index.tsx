@@ -22,11 +22,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [isAuthenticated]);
 
   const login = async (values: { email: string; password: string }) => {
-    console.log("🦆 ~ login ~ values:", values);
     const response = await fetch(`${API_BASE_URL}/users/login`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", // Set the content type to JSON
+        "Content-Type": "application/json", 
       },
       body: JSON.stringify(values),
     });
