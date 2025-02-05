@@ -95,7 +95,7 @@ export const ModalAddReport = (props: {
       "SKP",
       "SPDI",
     ],
-    Dukman: ["TU Kepegawaian", "Keuangan", "RTP"],
+    Dukman: ["TU Kepegawaian", "Keuangan", "RTP", "Penataan Arsip"],
   };
 
   return (
@@ -119,7 +119,7 @@ export const ModalAddReport = (props: {
           data={[
             "Teknis",
             "Dukman",
-            "Tiket Pelayanan",
+            "Piket Pelayanan",
             "Monitoring Kebersihan",
           ]}
           {...form.getInputProps("section")}
