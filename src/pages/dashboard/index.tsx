@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { Calendar } from "@mantine/dates";
-import { Alert, Button } from "@mantine/core";
+import { Alert, Button, Text } from "@mantine/core";
 import { ModalAddSchedule } from "../components/modal-add-schedule";
 import { Schedules } from "./types";
 
@@ -57,8 +57,9 @@ export const Dashboard = () => {
         title="Alert title"
         // icon={icon}
       >
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. At officiis,
-        quae tempore necessitatibus placeat saepe.
+        {schedules.map(() => (
+          <Text ta="right">Aligned to right</Text>
+        ))}
       </Alert>
       <Button onClick={() => toggleForm()}>Buat skedul</Button>
       <Calendar
