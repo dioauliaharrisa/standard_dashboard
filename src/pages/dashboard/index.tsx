@@ -57,8 +57,8 @@ export const Dashboard = () => {
         title="Alert title"
         // icon={icon}
       >
-        {schedules.map(() => (
-          <Text ta="right">Aligned to right</Text>
+        {schedules.map((each) => (
+          <Text>{each.details}</Text>
         ))}
       </Alert>
       <Button onClick={() => toggleForm()}>Buat skedul</Button>
