@@ -13,7 +13,7 @@ export const TableTeknis = ({ data }) => {
     <Table className={styles.table}>
       <TableHeader />
       <Table.Tbody>
-        <Table.Tr>{rows} </Table.Tr>
+        <Table.Tr>{rows}</Table.Tr>
       </Table.Tbody>
     </Table>
   );

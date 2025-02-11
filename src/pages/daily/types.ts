@@ -5,5 +5,6 @@ export type Report = {
   personnels: string[]; // Array of personnel names
   report: { type: string; outputReport: string };
   documentation?: string | null; // URL or file path (nullable)
+  documentation_details: { name: string; mimetype: string };
   outputReport: string;
 };

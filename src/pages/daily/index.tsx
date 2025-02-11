@@ -22,7 +22,6 @@ export const DailyReport = () => {
         throw new Error(`Error: ${response.statusText}`);
       }
       const data = await response.json();
-      console.log("🦆 ~ fetchReports ~ data:", data);
       setReports(data);
     } catch (err) {
       console.log(err);
@@ -33,39 +32,49 @@ export const DailyReport = () => {
     fetchReports();
   }, []);
 
-  function getMimeTypeFromMagicNumber(buffer) {
-    const uint = new Uint8Array(buffer).subarray(0, 4);
-    const header = uint.reduce(
-      (str, byte) => str + byte.toString(16).padStart(2, "0"),
-      ""
+  const bufferToBase64 = (buffer) => {
+    // Ensure the buffer is an array of bytes
+    const uint8Array = new Uint8Array(buffer.data);
+
+    // Convert the Uint8Array to a binary string
+    let binaryString = "";
+    uint8Array.forEach((byte) => {
+      binaryString += String.fromCharCode(byte);
+    });
+
+    // Convert the binary string to base64
+    return `data:image/jpeg;base64,${btoa(binaryString)}`;
+  };
+
+  const bufferToBlobUrl = (buffer, mimeType) => {
+    const blob = new Blob([new Uint8Array(buffer.data)], { type: mimeType });
+    return URL.createObjectURL(blob);
+  };
+
+  const handleShowFile = (buffer, details) => {
+    console.log("🦆 ~ handleShowFile ~ buffer, details:", buffer);
+
+    const imageUrl = bufferToBase64(buffer);
+    console.log("🦆 ~ handleShowFile ~ imageUrl:", imageUrl);
+
+    if (details.mimetype.startsWith("image/")) {
+      return (
+        <img
+          src={imageUrl}
+          alt="Preview"
+          style={{ maxWidth: "100px", maxHeight: "100px" }}
+        />
+      );
+    }
+    const blobUrl = bufferToBlobUrl(buffer, details.mimetype);
+    return (
+      <a href={blobUrl} download={details.name}>
+        Download {details.name}
+      </a>
     );
-
-    const signatures = {
-      "89504e47": "image/png", // PNG
-      ffd8ffe0: "image/jpeg", // JPEG
-      ffd8ffe1: "image/jpeg", // JPEG
-      ffd8ffe2: "image/jpeg", // JPEG
-      ffd8ffe3: "image/jpeg", // JPEG
-      ffd8ffe8: "image/jpeg", // JPEG
-      "47494638": "image/gif", // GIF
-      "49492a00": "image/tiff", // TIFF (little endian)
-      "4d4d002a": "image/tiff", // TIFF (big endian)
-      "52494646": "image/webp", // WebP
-      d0cf11e0a1b11ae1: "application/vnd.ms-excel", // XLS (Binary)
-      "504b0304": "application/zip", // XLSX (needs further checking)
-    };
-
-    return signatures[header] || "application/octet-stream";
-  }
+  };
 
   const rows = reports.map((report) => {
-    const bufferData = new Uint8Array(report.documentation);
-    const mimeType = getMimeTypeFromMagicNumber(bufferData);
-    const blob = new Blob([bufferData], { type: "application/zip" });
-    const file = new File([blob], "your-file-name.zip", {
-      type: "application/zip",
-    });
-    console.log("🦆 ~ rows ~ file:", file);
     return (
       <Table.Tr key={report.id}>
         <Table.Td>
@@ -79,7 +88,11 @@ export const DailyReport = () => {
         <Table.Td>{report.report.type ?? "-"}</Table.Td>
         <Table.Td>{report.personnels}</Table.Td>
         <Table.Td>{report.report.outputReport}</Table.Td>
-        <Table.Td>{report.documentation ? "file" : "No"}</Table.Td>
+        <Table.Td>
+          {report.documentation
+            ? handleShowFile(report.documentation, report.documentation_details)
+            : "No"}
+        </Table.Td>
       </Table.Tr>
     );
   });

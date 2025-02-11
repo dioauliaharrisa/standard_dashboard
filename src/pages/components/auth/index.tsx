@@ -25,11 +25,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     const response = await fetch(`${API_BASE_URL}/users/login`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", 
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(values),
     });
-    console.log("🦆 ~ login ~ response:", response);
     if (response.ok) {
       setIsAuthenticated(true);
       return true;

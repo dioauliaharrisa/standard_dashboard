@@ -30,7 +30,6 @@ export const Login = () => {
     if (isSuccessLogin) {
       navigate("/");
     }
-    console.log("🦆 ~ handleSubmit ~ isSuccessLogin:", isSuccessLogin);
   };
 
   return (
