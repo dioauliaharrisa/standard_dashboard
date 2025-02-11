@@ -2,8 +2,9 @@ import { Table } from "@mantine/core";
 import { TableHeader } from "./table-header";
 import styles from "./index.module.css";
 import { mapSectionReportType } from "../../../components/modal-add-reports/map-section-report-type";
+import { PropsTableTeknis } from "./types";
 
-export const TableTeknis = ({ data }) => {
+export const TableTeknis = ({ data }: PropsTableTeknis) => {
   if (!data) return null;
 
   const rows = mapSectionReportType["Teknis"].map((each) => {

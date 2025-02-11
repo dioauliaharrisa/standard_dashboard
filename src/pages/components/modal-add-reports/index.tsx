@@ -18,12 +18,15 @@ import { listScopeOfWork } from "./list-scope-of-work";
 import { mapSectionReportType } from "./map-section-report-type";
 
 const API_BASE_URL = "http://localhost:3000";
-
-export const ModalAddReport = (props: {
+export type ModalAddReportProps = {
   shouldShowForm: boolean;
   toggleForm: () => void;
-  fetchReports: () => void;
-}) => {
+  fetchReports: () => Promise<void>;
+  setValue?: React.Dispatch<React.SetStateAction<Date | null>>; // Make it optional
+  value?: Date | null;
+};
+
+export const ModalAddReport = (props: ModalAddReportProps) => {
   const form = useForm({
     initialValues: {
       date: new Date(),

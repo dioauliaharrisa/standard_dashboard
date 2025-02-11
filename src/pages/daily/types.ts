@@ -4,7 +4,7 @@ export type Report = {
   section: "Teknis" | "Dukman" | "Piket Pelayanan" | "Monitoring Kebersihan";
   personnels: string[]; // Array of personnel names
   report: { type: string; outputReport: string };
-  documentation?: string | null; // URL or file path (nullable)
+  documentation?: ArrayBuffer | { data: number[] } | null; // URL or file path (nullable)
   documentation_details: { name: string; mimetype: string };
   outputReport: string;
 };

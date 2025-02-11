@@ -32,9 +32,12 @@ export const DailyReport = () => {
     fetchReports();
   }, []);
 
-  const bufferToBase64 = (buffer) => {
+  const bufferToBase64 = (buffer: ArrayBuffer | { data: number[] }): string => {
     // Ensure the buffer is an array of bytes
-    const uint8Array = new Uint8Array(buffer.data);
+    const uint8Array =
+      buffer instanceof ArrayBuffer
+        ? new Uint8Array(buffer)
+        : new Uint8Array(buffer.data);
 
     // Convert the Uint8Array to a binary string
     let binaryString = "";
@@ -46,16 +49,27 @@ export const DailyReport = () => {
     return `data:image/jpeg;base64,${btoa(binaryString)}`;
   };
 
-  const bufferToBlobUrl = (buffer, mimeType) => {
-    const blob = new Blob([new Uint8Array(buffer.data)], { type: mimeType });
+  const bufferToBlobUrl = (
+    buffer: ArrayBuffer | { data: number[] },
+    mimeType: string
+  ): string => {
+    // Ensure the buffer is correctly converted to Uint8Array
+    const uint8Array =
+      buffer instanceof ArrayBuffer
+        ? new Uint8Array(buffer)
+        : new Uint8Array(buffer.data);
+
+    // Create a Blob from the buffer and generate an object URL
+    const blob = new Blob([uint8Array], { type: mimeType });
     return URL.createObjectURL(blob);
   };
 
-  const handleShowFile = (buffer, details) => {
-    console.log("🦆 ~ handleShowFile ~ buffer, details:", buffer);
-
+  const handleShowFile = (
+    buffer: ArrayBuffer | { data: number[] },
+    details: { mimetype: string; name: string }
+  ) => {
+    if (!buffer) return "No file available";
     const imageUrl = bufferToBase64(buffer);
-    console.log("🦆 ~ handleShowFile ~ imageUrl:", imageUrl);
 
     if (details.mimetype.startsWith("image/")) {
       return (
@@ -66,6 +80,7 @@ export const DailyReport = () => {
         />
       );
     }
+
     const blobUrl = bufferToBlobUrl(buffer, details.mimetype);
     return (
       <a href={blobUrl} download={details.name}>
@@ -91,7 +106,7 @@ export const DailyReport = () => {
         <Table.Td>
           {report.documentation
             ? handleShowFile(report.documentation, report.documentation_details)
-            : "No"}
+            : "No file"}
         </Table.Td>
       </Table.Tr>
     );
