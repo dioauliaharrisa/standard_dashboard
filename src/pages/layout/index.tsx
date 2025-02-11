@@ -53,7 +53,7 @@ export const Layout: React.FC = () => {
       </Paper>
       <div className={styles.page}>
         <Card className={styles.header}>
-          <Text>Hello, {userName || "Guest"}</Text>
+          <Text>Selamat datang, {userName || "Guest"}</Text>
         </Card>
         <Outlet />
       </div>
