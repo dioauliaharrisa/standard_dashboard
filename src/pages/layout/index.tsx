@@ -1,6 +1,6 @@
-import { Card, NavLink, Paper } from "@mantine/core";
+import { Card, NavLink, Paper, Text } from "@mantine/core";
 // import { IconGauge, IconFingerprint } from "@tabler/icons-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./index.module.css";
 import { Outlet } from "react-router";
 
@@ -23,6 +23,9 @@ export const Layout: React.FC = () => {
       href: "monthly",
     },
   ];
+
+  const [userName, setUserName] = useState<string | null>(null);
+
   const items = data.map((item, index) => (
     <NavLink
       href={item.href}
@@ -35,13 +38,23 @@ export const Layout: React.FC = () => {
     />
   ));
 
+  useEffect(() => {
+    const authData = localStorage.getItem("auth");
+    if (authData) {
+      const parsedAuth = JSON.parse(authData);
+      setUserName(parsedAuth.name);
+    }
+  }, []);
+
   return (
     <div className={styles.dashboard}>
       <Paper shadow="xs" className={styles.sidebar}>
         {items}
       </Paper>
       <div className={styles.page}>
-        <Card className={styles.header}></Card>
+        <Card className={styles.header}>
+          <Text>Hello, {userName || "Guest"}</Text>
+        </Card>
         <Outlet />
       </div>
     </div>

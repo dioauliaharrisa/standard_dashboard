@@ -4,6 +4,7 @@ import { useNavigate, Outlet } from "react-router";
 
 const ProtectedRoute: React.FC = () => {
   const { isAuthenticated } = useAuth();
+  console.log("🦆 ~ isAuthenticated:", isAuthenticated);
   const navigate = useNavigate();
 
   useEffect(() => {
