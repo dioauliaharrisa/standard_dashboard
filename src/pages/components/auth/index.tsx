@@ -17,11 +17,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     isAuthenticated: boolean;
     name: string | null;
     id: string;
+    role: string | "PEGAWAI";
   }>(() => {
     const storedAuth = localStorage.getItem("auth");
     return storedAuth
       ? JSON.parse(storedAuth)
-      : { isAuthenticated: false, name: null, id: "" };
+      : { isAuthenticated: false, name: null, id: "", role: "" };
   });
 
   useEffect(() => {
@@ -39,7 +40,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     if (response.ok) {
       const data = await response.json();
       console.log("🦆 ~ login ~ data:", data);
-      setAuthState({ isAuthenticated: true, name: data.name, id: data.id });
+      setAuthState({
+        isAuthenticated: true,
+        name: data.name,
+        id: data.id,
+        role: data.role,
+      });
       return true;
     }
     return false;

@@ -20,13 +20,14 @@ export const DailyReport = () => {
       const storedAuth = localStorage.getItem("auth");
       const auth = storedAuth ? JSON.parse(storedAuth) : null;
       const userId = auth?.id || "";
+      const role = auth?.role || "PEGAWAI";
 
       const response = await fetch(`${API_BASE_URL}/report/get-all`, {
         method: "POST", // Change to POST to send a request body
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id: userId }), // Modify as needed
+        body: JSON.stringify({ id: userId, role: role }), // Modify as needed
       });
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);

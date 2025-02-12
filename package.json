@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "pushhhh": "git add . && aic && git push origin master"
   },
   "dependencies": {
     "@mantine/core": "7.16.0",

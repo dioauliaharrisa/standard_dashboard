@@ -51,7 +51,9 @@ export const ModalAddReport = (props: ModalAddReportProps) => {
     try {
       const storedAuth = localStorage.getItem("auth");
       const auth = storedAuth ? JSON.parse(storedAuth) : null;
+      console.log("🦆 ~ fetchPersonnels ~ auth:", auth);
       const userId = auth?.id || "";
+      const role = auth?.role || "PEGAWAI";
 
       const response = await fetch(`${API_BASE_URL}/report/get-personnels`, {
         method: "POST",
