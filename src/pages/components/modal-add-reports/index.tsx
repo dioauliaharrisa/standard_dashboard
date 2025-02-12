@@ -11,18 +11,18 @@ import {
 import { DatePickerInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 
-import { FormValues } from "./types";
-import { listNamePersonnels } from "./list-personnel-names";
+import { FormValues, Personnel } from "./types";
 import { listNameUPIs } from "./list-name-upis";
 import { listScopeOfWork } from "./list-scope-of-work";
 import { mapSectionReportType } from "./map-section-report-type";
+import { useEffect, useState } from "react";
 
 const API_BASE_URL = "http://localhost:3000";
 export type ModalAddReportProps = {
   shouldShowForm: boolean;
   toggleForm: () => void;
   fetchReports: () => Promise<void>;
-  setValue?: React.Dispatch<React.SetStateAction<Date | null>>; // Make it optional
+  setValue?: React.Dispatch<React.SetStateAction<Date | null>>;
   value?: Date | null;
 };
 
@@ -44,6 +44,35 @@ export const ModalAddReport = (props: ModalAddReportProps) => {
 
     validate: {},
   });
+
+  const [personnels, setPersonnels] = useState<Personnel[]>([]);
+
+  const fetchPersonnels = async () => {
+    try {
+      const storedAuth = localStorage.getItem("auth");
+      const auth = storedAuth ? JSON.parse(storedAuth) : null;
+      const userId = auth?.id || "";
+
+      const response = await fetch(`${API_BASE_URL}/report/get-personnels`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: userId }),
+      });
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+      const data = await response.json();
+      setPersonnels(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchPersonnels();
+  }, []);
 
   const handleSubmit = async (values: FormValues) => {
     try {
@@ -150,7 +179,7 @@ export const ModalAddReport = (props: ModalAddReportProps) => {
         <MultiSelect
           label="Personil"
           placeholder="Search value"
-          data={listNamePersonnels}
+          data={personnels}
           nothingFoundMessage="Nothing found..."
           {...form.getInputProps("personnels")}
         />

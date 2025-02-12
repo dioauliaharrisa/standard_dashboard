@@ -21,3 +21,8 @@ export interface CreateReportRequest {
 export interface CreateReportResponse {
   id: number;
 }
+
+export type Personnel = {
+  id: number;
+  name: string;
+};

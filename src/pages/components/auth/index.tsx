@@ -16,11 +16,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [authState, setAuthState] = useState<{
     isAuthenticated: boolean;
     name: string | null;
+    id: string;
   }>(() => {
     const storedAuth = localStorage.getItem("auth");
     return storedAuth
       ? JSON.parse(storedAuth)
-      : { isAuthenticated: false, name: null };
+      : { isAuthenticated: false, name: null, id: "" };
   });
 
   useEffect(() => {
@@ -38,13 +39,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     if (response.ok) {
       const data = await response.json();
       console.log("🦆 ~ login ~ data:", data);
-      setAuthState({ isAuthenticated: true, name: data.name });
+      setAuthState({ isAuthenticated: true, name: data.name, id: data.id });
       return true;
     }
     return false;
   };
   const logout = () => {
-    setAuthState({ isAuthenticated: false, name: null });
+    setAuthState({ isAuthenticated: false, name: null, id: "" });
     localStorage.removeItem("auth");
   };
 
