@@ -7,13 +7,23 @@ import { Report } from "./types";
 const API_BASE_URL = "http://localhost:3000";
 
 export const DailyReport = () => {
+  const ITEMS_PER_PAGE = 5;
+
+  const [reports, setReports] = useState<Report[]>([]);
   const [shouldShowForm, setShouldShowForm] = useState(false);
+
+  const [pagination, setPagination] = useState<number>(1);
+
+  const totalPaginationNumber = Math.ceil(reports.length / ITEMS_PER_PAGE) || 1;
 
   const toggleForm = () => {
     setShouldShowForm(!shouldShowForm);
   };
 
-  const [reports, setReports] = useState<Report[]>([]);
+  const paginatedReports = reports.slice(
+    (pagination - 1) * ITEMS_PER_PAGE,
+    pagination * ITEMS_PER_PAGE
+  );
 
   const fetchReports = async () => {
     try {
@@ -100,7 +110,7 @@ export const DailyReport = () => {
     );
   };
 
-  const rows = reports.map((report) => {
+  const rows = paginatedReports.map((report) => {
     return (
       <Table.Tr key={report.id}>
         <Table.Td>
@@ -124,6 +134,7 @@ export const DailyReport = () => {
   });
 
   const [value, setValue] = useState<Date | null>(null);
+
   return (
     <>
       <ModalAddReport
@@ -153,8 +164,10 @@ export const DailyReport = () => {
         </Table>
         <div className={styles.pagination_bar}>
           <Pagination
+            value={pagination}
+            onChange={setPagination}
             className={styles.pagination}
-            total={reports.length}
+            total={totalPaginationNumber}
             siblings={1}
             boundaries={1}
           />
