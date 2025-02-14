@@ -3,7 +3,7 @@ import { DatePickerInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import { FormAddSchedule } from "./types";
 
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
 
 export const ModalAddSchedule = (props: {
   shouldShowForm: boolean;

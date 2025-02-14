@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ModalAddReport } from "../components/modal-add-reports";
 import { Report } from "./types";
 
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
 
 export const DailyReport = () => {
   const ITEMS_PER_PAGE = 5;

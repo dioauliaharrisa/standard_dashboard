@@ -7,7 +7,8 @@ import { Schedules } from "./types";
 import { TableTeknis } from "./components/table-teknis";
 import { TableDukman } from "./components/table-dukman";
 
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
 
 export const Dashboard = () => {
   const [selected, setSelected] = useState<Date[]>([]);
